@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Update Car</h1>
+    <div class="update">
+        <form action="/update" method="post">
+            <input type="text" name="car_name" value="{{ car_name }}" autofocus>
+            <input type="text" name="made_year" value="{{ made_year }}">
+            <input type="text" name="color" value="{{ color }}">
+            <input type="text" name="car_number" value="{{ car_number }}">
+            <input type="text" name="driver_name" value="{{ driver_name }}">
+            <input type="text" name="last_visit" value="{{ last_visit }}">
+            <input type="text" name="last_check" value="{{ last_check }}">
+            <input type="submit" value="Update">
+        </form>    
+    </div>
+</body>
+</html>

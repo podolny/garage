@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cars</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="search">
+        <form action="/search" method="get">
+            <input type="text" name="query">
+            <input type="submit" value="Search">
+        </form>
+    </div>
+    <div class="cars">
+        <div class="car">
+            <div class="car_name">car name</div>
+            <div class="made_year">made year</div>
+            <div class="color">color</div>
+            <div class="car_number">car number</div>
+            <div class="driver_name">driver name</div>
+            <div class="last_visit">last visit</div>
+            <div class="last_check">last check</div> 
+        </div>
+    </div>
+    <div>
+        <form class="find" action="/find" method="get">
+            <select class="car_name" name="car_name">
+                <option value="">choose car name</option>
+                {% for car in cars|sort(attribute='car_name') %}
+                    <option value="{{ car.car_name }}" {% if car.car_name == "" %}selected{% endif %}>{{ car.car_name }}</option>
+                {% endfor %}
+            </select>
+            <input type="number" class="last" name="from_year" placeholder="from year" min="1970" max="2023">
+            <input type="number" class="last" name="till_year" placeholder="till year" min="1970" max="2023">
+            <select class="color" name="color">
+                <option value="">choose car color</option>
+                {% for car in cars|sort(attribute='color') %}
+                    <option value="{{ car.color }}" {% if car.color == "" %}selected{% endif %}>{{ car.color }}</option>
+                {% endfor %}
+            </select>
+            <select class="car_number" name="car_number">
+                <option value="">choose car number</option>
+                {% for car in cars|sort(attribute='car_number') %}
+                    <option value="{{ car.car_number }}" {% if car.car_number == "" %}selected{% endif %}>{{ car.car_number }}</option>
+                {% endfor %}
+            </select>
+            <select class="driver_name" name="driver_name">
+                <option value="">choose driver name</option>
+                {% for car in cars|sort(attribute='driver_name') %}
+                    <option value="{{ car.driver_name }}" {% if car.driver_name == "" %}selected{% endif %}>{{ car.driver_name }}</option>
+                {% endfor %}
+            </select>
+
+            <input type="date" class="last" name="last_visit_from" placeholder="from date">
+            <input type="date" class="last" name="last_visit_till" placeholder="till date">
+
+            <input type="date" class="last" name="last_check_from" placeholder="from date">
+            <input type="date" class="last" name="last_check_till" placeholder="till date">
+
+            <input type="submit" value="Find">
+        </form>
+    </div>
+    <div class="cars">
+        {% for car in cars %}
+        <div class="car">
+            <div class="car_name">{{ car.car_name }}</div>
+            <div class="made_year">{{ car.made_year }}</div>
+            <div class="color">{{ car.color }}</div>
+            <div class="car_number">{{ car.car_number }}</div>
+            <div class="driver_name">{{ car.driver_name }}</div>
+            <div class="last_visit">{{ car.last_visit }}</div>
+            <div class="last_check">{{ car.last_check }}</div>
+            <div class="update"><a href="/update?car_name={{ car.car_name }}&made_year={{ car.made_year }}&color={{ car.color }}&car_number={{ car.car_number }}&driver_name={{ car.driver_name }}&last_visit={{ car.last_visit }}&last_check={{ car.last_check }}">update</a></div>
+            <div class="delete"><a href="/delete?car_number={{ car.car_number }}">delete</a></div>  
+        </div>
+        {% endfor %}
+    </div>
+    <div>
+        <h3>Total cars is:</h3>
+        <h3>{{ total_cars }}</h3>
+    </div>
+    <div class="add">
+        <form action="/add" method="get">
+            <input type="text" name="car_name" placeholder="car_name" autofocus>
+            <input type="text" name="made_year" placeholder="made_year">
+            <input type="text" name="color" placeholder="color">
+            <input type="text" name="car_number" placeholder="car_number">
+            <input type="text" name="driver_name" placeholder="driver_name">
+            <input type="text" name="last_visit" placeholder="last_visit">
+            <input type="text" name="last_check" placeholder="last_check">
+            <input type="submit" value="Add">
+        </form>
+    </div>
+</body>
+</html>
